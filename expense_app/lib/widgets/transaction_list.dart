@@ -10,9 +10,7 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return transactions.isNotEmpty
-        ? SizedBox(
-            height: 500,
-            child: ListView.builder(
+        ?  ListView.builder(
               itemBuilder: (context, index) {
                 return Card(
                   elevation: 5,
@@ -40,10 +38,11 @@ class TransactionList extends StatelessWidget {
                 );
               },
               itemCount: transactions.length,
-            ),
-          )
-        : Text("No Transaction yet",
-            style: Theme.of(context).textTheme.headline5);
+            )
+        : Container(
+          child: Text("No Transaction yet",
+              style: Theme.of(context).textTheme.headline5),
+        );
   }
 }
 

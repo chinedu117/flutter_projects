@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import './widgets/new_transaction.dart';
-import 'package:expense_app/widgets/transaction_list.dart';
-import 'package:expense_app/models/transaction.dart';
+import './widgets/transaction_list.dart';
+import './models/transaction.dart';
 import './widgets/chart.dart';
 
 void main() {
+  
+  // WidgetsFlutterBinding.ensureInitialized();
+
+  // SystemChrome.setPreferredOrientations([
+  //    DeviceOrientation.portraitUp,
+  //    DeviceOrientation.portraitDown
+  // ]);
   runApp(MyApp());
 }
 
@@ -39,10 +47,19 @@ class _ExpenseAppState extends State<ExpenseApp> {
     // Transaction(id: 2, title: "New Shirt", amount: 50.0, date: DateTime.now()),
   ];
 
-  void deleteTransaction(int id){
-     setState(() {
-        transactions.removeWhere((element) => element.id == id);
-     });
+  bool _showChart = true;
+
+  void _toggleChart(val){
+      
+      setState(() {
+         _showChart = val;
+      });
+  }
+
+  void deleteTransaction(int id) {
+    setState(() {
+      transactions.removeWhere((element) => element.id == id);
+    });
   }
 
   List<Transaction> get lastWeekTransactions {
@@ -78,27 +95,60 @@ class _ExpenseAppState extends State<ExpenseApp> {
   @override
   Widget build(BuildContext context) {
 
+    final mediaQuery = MediaQuery.of(context);
+ 
+    final isLandscape = mediaQuery.orientation == Orientation.landscape;
+
     final appBar = AppBar(
-        title: const Text("Expense App"),
-        actions: [
-          IconButton(
-            onPressed: () => _showAddNewTransaction(context),
-            icon: const Icon(Icons.add),
-          ),
-        ],
-      );
+      title: const Text("Expense App"),
+      actions: [
+        IconButton(
+          onPressed: () => _showAddNewTransaction(context),
+          icon: const Icon(Icons.add),
+        ),
+      ],
+    );
+
+    final availableScreenHeight = (mediaQuery.size.height - mediaQuery.padding.top -
+                    appBar.preferredSize.height);
+
+    final chartWidget = Container(
+            height: isLandscape ? availableScreenHeight * 0.7 :  availableScreenHeight *
+                0.3,
+            child: Chart(lastWeekTransactions),
+          );
+
+    final transListWidget = Container(
+            height:  isLandscape ? availableScreenHeight * 0.7 :  availableScreenHeight *
+                0.7,
+            child: TransactionList(
+              transactions: transactions,
+              deleteTransaction: deleteTransaction,
+            ),
+          );
+
+    
 
     return Scaffold(
       appBar: appBar,
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
 
         children: [
-          Chart(lastWeekTransactions),
-          TransactionList(
-            transactions: transactions,
-            deleteTransaction: deleteTransaction,
-          ),
+
+           if(!isLandscape) ...[chartWidget,transListWidget],
+
+           if(isLandscape) Row(
+             mainAxisAlignment: MainAxisAlignment.center,
+             crossAxisAlignment: CrossAxisAlignment.start,
+             children: [
+               Switch(value: _showChart, onChanged: _toggleChart),
+             ],
+           ),
+
+           if(isLandscape)  _showChart ? chartWidget : transListWidget,
+
+           
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
