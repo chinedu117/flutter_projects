@@ -18,7 +18,9 @@ class _NewTransactionState extends State<NewTransaction> {
   var _chosenDate;
 
   void submitData() {
-    if (amountController.text.isEmpty || titleController.text.isEmpty || _chosenDate == null) {
+    if (amountController.text.isEmpty ||
+        titleController.text.isEmpty ||
+        _chosenDate == null) {
       return;
     }
 
@@ -29,76 +31,74 @@ class _NewTransactionState extends State<NewTransaction> {
   }
 
   void _selectDate() {
-
-    
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(2021),
       lastDate: DateTime.now(),
-    ).then((selectedDate){
-        
-        if(selectedDate == null){
-           return;
-        }
-         setState(() {
-          _chosenDate = selectedDate;
-        });
-
-
+    ).then((selectedDate) {
+      if (selectedDate == null) {
+        return;
+      }
+      setState(() {
+        _chosenDate = selectedDate;
+      });
     });
-
-    
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            TextField(
-              controller: titleController,
-              onSubmitted: (_) => submitData(),
-              decoration: const InputDecoration(
-                labelText: "Title",
+    return SingleChildScrollView(
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left:10,
+            right:10,
+            top: 10,
+            bottom: (MediaQuery.of(context).viewInsets.bottom + 10),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              TextField(
+                controller: titleController,
+                onSubmitted: (_) => submitData(),
+                decoration: const InputDecoration(
+                  labelText: "Title",
+                ),
               ),
-            ),
-            TextField(
-              controller: amountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => submitData(),
-              decoration: const InputDecoration(
-                labelText: "Amount",
+              TextField(
+                controller: amountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => submitData(),
+                decoration: const InputDecoration(
+                  labelText: "Amount",
+                ),
               ),
-            ),
-            Container(
-              
-              margin: const EdgeInsets.only(top: 20),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      _chosenDate == null
-                          ? "No chosen date !"
-                          : DateFormat.yMd().format(_chosenDate),
+              Container(
+                margin: const EdgeInsets.only(top: 20),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        _chosenDate == null
+                            ? "No chosen date !"
+                            : DateFormat.yMd().format(_chosenDate),
+                      ),
                     ),
-                  ),
-                  ElevatedButton(
-                
-                    onPressed: _selectDate,
-                    child: const Text('Select Date'),
-                  ),
-                ],
+                    ElevatedButton(
+                      onPressed: _selectDate,
+                      child: const Text('Select Date'),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () => submitData(),
-              child: const Text('Add Expense'),
-            )
-          ],
+              ElevatedButton(
+                onPressed: () => submitData(),
+                child: const Text('Add Expense'),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -7,12 +7,12 @@ import './widgets/chart.dart';
 
 void main() {
   
-  // WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // SystemChrome.setPreferredOrientations([
-  //    DeviceOrientation.portraitUp,
-  //    DeviceOrientation.portraitDown
-  // ]);
+  SystemChrome.setPreferredOrientations([
+     DeviceOrientation.portraitUp,
+     DeviceOrientation.portraitDown
+  ]);
   runApp(MyApp());
 }
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ExpenseApp extends StatefulWidget {
+class ExpenseApp extends StatefulWidget  {
   ExpenseApp({Key? key}) : super(key: key);
 
   @override
