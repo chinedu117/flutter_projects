@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './models/category.dart';
 import './models/meal.dart';
 
-const DUMMY_CATEGORIES = const [
+const DUMMY_CATEGORIES =  [
   Category(
     id: 'c1',
     title: 'Italian',
@@ -68,7 +68,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 20,
     ingredients: [
       '4 Tomatoes',
@@ -101,7 +101,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 10,
     ingredients: [
       '1 Slice White Bread',
@@ -130,7 +130,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Pricey,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 45,
     ingredients: [
       '300g Cattle Hack',
@@ -161,7 +161,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Challenging,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 60,
     ingredients: [
       '8 Veal Cutlets',
@@ -198,7 +198,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 15,
     ingredients: [
       'Arugula',
@@ -232,7 +232,7 @@ const DUMMY_MEALS =  [
     title: 'Delicious Orange Mousse',
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
-    imageUrl:'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+    imageUrl:'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 240,
     ingredients: [
       '4 Sheets of Gelatine',
@@ -267,7 +267,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Affordable,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 20,
     ingredients: [
       '1 1/2 Cups all-purpose Flour',
@@ -298,7 +298,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Pricey,
     complexity: Complexity.Challenging,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 35,
     ingredients: [
       '4 Chicken Breasts',
@@ -331,7 +331,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Affordable,
     complexity: Complexity.Hard,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 45,
     ingredients: [
       '1 Teaspoon melted Butter',
@@ -382,7 +382,7 @@ const DUMMY_MEALS =  [
     affordability: Affordability.Luxurious,
     complexity: Complexity.Simple,
     imageUrl:
-        'https://2aj47i3u0emv3rfnwz2zoyfm-wpengine.netdna-ssl.com/wp-content/uploads/2017/09/unsplash.jpg',
+        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
     duration: 30,
     ingredients: [
       'White and Green Asparagus',

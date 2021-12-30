@@ -9,11 +9,7 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const categories = DUMMY_CATEGORIES;
 
-    return Scaffold(
-      appBar: AppBar(
-        title:  Text('Meal Categories', style: Theme.of(context).textTheme.headline4,),
-      ),
-      body: GridView.builder(
+    return  GridView.builder(
         padding: const EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           crossAxisSpacing: 20,
@@ -29,7 +25,7 @@ class CategoriesScreen extends StatelessWidget {
           );
         },
         itemCount: categories.length,
-      ),
+      
     );
   }
 }
