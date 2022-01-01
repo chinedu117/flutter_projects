@@ -5,6 +5,8 @@ class MealDetailScreen extends StatelessWidget {
   static String routeName = "/mealdetail";
 
   const MealDetailScreen({Key? key}) : super(key: key);
+  
+  
 
   Widget _buildSectionTitle(BuildContext context, String title) {
     return Container(
