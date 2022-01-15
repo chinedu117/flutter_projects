@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
+import '../widgets/home_drawer.dart';
 import '../widgets/product_grid.dart';
 import '../providers/product.dart';
 import '../providers/products.dart';
@@ -64,6 +65,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
       body: ProductGrid(
         showFavorites: _showFavorites,
       ),
+      drawer: Drawer(
+        child: HomeDrawer(),
+      )
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/cart.dart';
+import '../providers/orders.dart';
 
 import '../widgets/cart_item.dart' as wi;
 
@@ -35,9 +36,18 @@ class CartScreen extends StatelessWidget {
                       fontSize: 24,
                     ),
                   ),
+                  Spacer(),
                   Chip(
                     label: Text(cartData.totalWorth.toString()),
                     backgroundColor: Colors.red,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Provider.of<Orders>(context,listen: false)
+                          .addItem(cartData.items.values.toList());
+                      cartData.clear();
+                    },
+                    child: const Text("Place Order"),
                   ),
                 ],
               ),

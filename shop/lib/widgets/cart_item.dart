@@ -3,8 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../providers/cart.dart' as prov;
 
-
-class CartItem extends StatefulWidget {
+class CartItem extends StatelessWidget {
   final String id;
   final int quantity;
   final double price;
@@ -17,14 +16,9 @@ class CartItem extends StatefulWidget {
       required this.id});
 
   @override
-  State<CartItem> createState() => _CartItemState();
-}
-
-class _CartItemState extends State<CartItem> {
-  @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: ValueKey(widget.id),
+      key: ValueKey(id),
       background: Container(
         color: Colors.red,
         child: Row(
@@ -42,10 +36,13 @@ class _CartItemState extends State<CartItem> {
         ),
       ),
       onDismissed: (direction) {
-          setState(() {
-            
-          });
-          Provider.of<prov.Cart>(context,listen: false).removeCartItem(widget.id);
+        Provider.of<prov.Cart>(context, listen: false).removeCartItem(id);
+        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Removes item '),
+          ),
+        );
       },
       child: Card(
           child: Padding(
@@ -55,13 +52,13 @@ class _CartItemState extends State<CartItem> {
             child: FittedBox(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('\$${widget.price}'),
+                child: Text('\$${price}'),
               ),
             ),
           ),
-          title: Text(widget.title),
-          subtitle: Text('Total: \$${(widget.price * widget.quantity)}'),
-          trailing: Text('${widget.quantity} x'),
+          title: Text(title),
+          subtitle: Text('Total: \$${(price * quantity)}'),
+          trailing: Text('${quantity} x'),
         ),
       )),
     );
