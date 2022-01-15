@@ -1,52 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ProductsScreen extends StatelessWidget {
+
+import '../widgets/product_grid.dart';
+import '../providers/product.dart';
+import '../providers/products.dart';
+import '../widgets/product_item.dart';
+
+import './cart_screen.dart';
+
+enum FilterOptions {
+  All,
+  Favorites,
+}
+
+class ProductsScreen extends StatefulWidget {
   static const routeName = '/';
 
-  const ProductsScreen({Key? key}) : super(key: key);
+  @override
+  State<ProductsScreen> createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
+  var _showFavorites = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Chizmart"),
+        actions: [
+          PopupMenuButton(
+            icon: Icon(Icons.more_vert),
+            onSelected: (dynamic selectedItem) {
+              setState(() {
+                if (selectedItem == FilterOptions.Favorites) {
+                  _showFavorites = true;
+                } else {
+                  //show all
+                  _showFavorites = false;
+                }
+              });
+            },
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: Text("Show All"),
+                value: FilterOptions.All,
+              ),
+              PopupMenuItem(
+                child: Text("Favorites"),
+                value: FilterOptions.Favorites,
+              ),
+            ],
+          ),
+
+          IconButton(onPressed: (){
+            Navigator.of(context).pushNamed(CartScreen.routeName);
+          }, icon: const Icon(Icons.shopping_cart)),
+
+          
+        ],
       ),
-      body: GridView.builder(
-        itemCount: 10,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-          childAspectRatio: 4 / 3,
-        ),
-        itemBuilder: (ctx, index) {
-          return ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: GridTile(
-              child: Image.network(
-                "https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg",
-                fit: BoxFit.cover,
-              ),
-              footer: GridTileBar(
-                backgroundColor: Colors.black38,
-                title: Text(
-                  "Product Name",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-                leading: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.favorite),
-                ),
-                trailing: IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.shopping_cart),
-                ),
-              ),
-            ),
-          );
-        },
+      body: ProductGrid(
+        showFavorites: _showFavorites,
       ),
     );
   }
