@@ -44,4 +44,9 @@ class Products with ChangeNotifier {
     // _items.insert(0, product); // adds to a specific index
     notifyListeners();
   }
+
+  Product getProductById(productID){
+     return _items.firstWhere((element) => element.id == productID);
+
+  }
 }
