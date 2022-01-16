@@ -7,7 +7,7 @@ import '../providers/product.dart';
 import '../providers/products.dart';
 
 class EditProductScreen extends StatefulWidget {
-  static const String routeName = 'edit-product';
+  static const String routeName = '/edit-product';
 
   EditProductScreen({Key? key}) : super(key: key);
 
@@ -21,8 +21,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageurlFocusNode = FocusNode();
-
   var _imageurlController = TextEditingController();
+
+  var _isEditing = false;
+  var _isInitialized = false;
 
   Product _editedProduct = Product(
     description: '',
@@ -38,14 +40,36 @@ class _EditProductScreenState extends State<EditProductScreen> {
       return; //stop save if any validator fails
     }
     _form.currentState!.save(); // Triggers onSave on all input
+     if(_isEditing) {
+        Provider.of<Products>(context, listen: false).editProduct(_editedProduct);  
 
-    Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+     }else {
+        Provider.of<Products>(context, listen: false).addProduct(_editedProduct);
+     }
+   
+    Navigator.of(context).pop();
   }
 
   @override
   void initState() {
     _imageurlFocusNode.addListener(_renderImage);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    var productID = ModalRoute.of(context)!.settings.arguments;
+    
+    if(!_isInitialized && productID != null){
+     
+       _editedProduct = Provider.of<Products>(context).getProductById(productID as String);
+       _imageurlController.text = _editedProduct.imageUrl;
+       _isEditing = true;
+    }
+
+    _isInitialized = true;
+   
+    super.didChangeDependencies();
   }
 
   void _renderImage() {
@@ -78,6 +102,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
             child: ListView(
               children: [
                 TextFormField(
+                  initialValue: _editedProduct.title,
                   decoration: InputDecoration(
                     labelText: "Title",
                   ),
@@ -92,6 +117,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   onSaved: (value) {
                     //handle save
                     _editedProduct = Product(
+          
                       title: value.toString(),
                       description: _editedProduct.description,
                       imageUrl: _editedProduct.imageUrl,
@@ -107,6 +133,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
                 //  Price field //
                 TextFormField(
+                  initialValue: _editedProduct.price.toString(),
                   decoration: const InputDecoration(
                     labelText: "Price",
                   ),
@@ -145,6 +172,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
                 //  Description field //
                 TextFormField(
+                  initialValue: _editedProduct.description,
                   decoration: const InputDecoration(
                     labelText: "Description",
                   ),
