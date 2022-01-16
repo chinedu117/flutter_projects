@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../screens/order_screen.dart';
 
 import '../providers/cart.dart';
 import '../providers/orders.dart';
@@ -46,6 +47,7 @@ class CartScreen extends StatelessWidget {
                       Provider.of<Orders>(context,listen: false)
                           .addItem(cartData.items.values.toList());
                       cartData.clear();
+                      Navigator.of(context).pushNamed(OrderScreen.routeName);
                     },
                     child: const Text("Place Order"),
                   ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/order_screen.dart';
 
 class HomeDrawer extends StatelessWidget {
   const HomeDrawer({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class HomeDrawer extends StatelessWidget {
 
         ListTile(
           onTap: (){
-            
+            Navigator.of(context).pushNamed(OrderScreen.routeName);
           },
-          leading: Icon(Icons.edit),
+          leading: Icon(Icons.shop),
           title: Text("Orders"),
 
           
